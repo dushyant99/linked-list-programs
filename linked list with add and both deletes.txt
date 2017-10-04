@@ -1,0 +1,105 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+int data;
+struct node* next;
+}head;
+
+
+void add(struct node* p,int pos,int data)
+{
+int i;
+struct node* new=(struct node*)malloc(sizeof(struct node));
+
+for(i=1;i<pos;i++)
+p=p->next;
+
+new->data=data;
+new->next=p->next;
+p->next=new;
+}
+
+void delete(struct node* p,int pos) //deletes according to position
+{
+	int i;
+	struct node* pre;
+	
+	if (p == NULL)
+      return;
+ 
+    // If head needs to be removed
+    if (pos == 0)
+    {
+        pre = p->next;   // Change head
+        free(p);               // free old head
+        return;
+    }
+	
+	
+	for(i=1;i<=pos;i++)
+	{
+		pre=p;
+		p=p->next;
+	}
+	pre->next=p->next;
+	free(p);
+}
+
+void delete2(struct node* p,int data)  //deletes according to data
+{
+	struct node* pre;
+	while(p->data!=data)
+	{
+		pre=p;
+		p=p->next;
+	}
+	
+	pre->next=p->next;
+	free(p);
+	
+}
+
+
+
+void print(struct node* p)
+{
+printf("\nthe generated linked list is: ");
+while(p!=NULL)
+{
+printf("%d ",p->data);
+p=p->next;
+}
+}
+
+int main(void)
+{
+struct node* head=(struct node*)malloc(sizeof(struct node));
+head->next=NULL;
+
+add(head,1,1);
+add(head,2,2);
+add(head,3,3);
+add(head,4,4);
+add(head,5,5);
+add(head,6,6);
+add(head,3,567);
+add(head,4,619);
+print(head->next);  //head->next, so that it doesn't prints '0' at the start of linked list 
+
+delete(head,4); 
+//delete(head,3); 
+print(head->next);
+
+delete2(head,567); 
+print(head->next);
+
+delete(head,2);
+print(head->next);
+
+delete(head,1);
+print(head->next);
+
+return 0;
+}

@@ -1,0 +1,108 @@
+//this has delete function based on "data" as search parameter
+
+
+#include<stdio.h>
+#include<stdlib.h>
+ 
+struct node
+{
+int data;
+struct node* next;
+};
+
+
+void add(struct node* p,int pos, int data)
+{
+//struct node* p=head;
+int i;
+struct node* new=(struct node*)malloc(sizeof(struct node));
+
+if(p==NULL)
+{
+p=new;
+new->data=data;
+new->next=NULL;
+return;
+}
+
+for(i=1;i<pos;i++)
+p=p->next;
+
+
+new->data=data;
+new->next=p->next;
+p->next=new;
+}
+
+
+void delete(struct node* p,int data)
+{
+int i;
+struct node * pre;
+
+while(p->data!=data)
+{
+pre=p;
+p=p->next;	
+}
+
+/*for(i=1;i<pos;i++)
+{
+pre=p;
+p=p->next;
+}*/
+
+
+pre->next=p->next;
+free(p);
+}
+
+void print(struct node* p)
+{
+//struct node* p=p;
+printf("\nthe generated linked list is:");
+while(p!=NULL)
+{
+printf("%d ",p->data);
+p=p->next;
+}
+}
+
+
+int main()
+{
+struct node* head=(struct node*)malloc(sizeof(struct node));
+head->next=NULL;
+
+add(head,1,1);
+add(head,2,2);
+add(head,3,3);
+add(head,4,4);
+add(head,5,5);
+add(head,3,184);
+add(head,6,735);
+add(head,8,8);
+
+print(head);
+
+delete(head,3);
+printf("\nlist after deletion: ");
+print(head);
+
+delete(head,184);
+printf("\nlist after deletion: ");
+print(head);
+
+delete(head,735);
+printf("\nlist after deletion: ");
+print(head);
+
+add(head,3,216);
+print(head);
+
+add(head,1,57);
+print(head);
+//(head,14,9);
+
+return 0;
+}

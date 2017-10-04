@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+	int data;
+	struct node* next;
+};
+struct node* head;
+
+void add(int data,int pos)
+{
+	struct node* temp=(struct node*)malloc(sizeof(struct node));
+	struct node* p=head;
+	int i;
+	temp->data=data;
+	
+	if(pos==1)
+	{
+		temp->next=head;
+		head=temp;
+		return;
+	}
+	
+	for(i=0;i<(pos-2);i++)
+	p=p->next;
+	
+	temp->next=p->next;
+	p->next=temp;
+}
+
+void print()
+{
+	struct node* p=head;
+	printf("The Linked List is as follows: ");
+	while(p!=NULL)
+	{
+		printf("%d ",p->data);
+		p=p->next;
+	}
+}
+
+
+void delete(int pos)
+{
+	struct node* p=head;
+	struct node* pre=NULL;
+	int i;
+	
+	if(pos==1)
+	{
+		
+	       head=p->next;
+		free(p);
+		return;
+	}
+	
+	for(i=0;i<(pos-1);i++)
+	{
+		pre=p;
+		p=p->next;
+	}
+	pre->next=p->next;
+	
+	p->next=NULL;
+	free(p);
+}
+
+
+void reverse()
+{
+	struct node* current=head;
+	struct node* pre=NULL;
+	struct node* post;
+	
+	while(current!=NULL)
+	{
+		post=current->next;
+		current->next=pre;
+		
+		pre=current;
+		current=post;
+	}
+	head=pre;
+}
+
+int main(void) {
+	head=NULL;
+	add(2,1);
+	add(4,2);
+	add(6,3);
+	add(8,4);
+	add(10,5);
+	print();
+	printf("\nLinked List after deletion: ");
+	delete(1);
+	print();
+	return 0;
+}
