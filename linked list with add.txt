@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+ 
+struct node
+{
+int data;
+struct node* next;
+};
+
+
+void add(struct node* p,int pos, int data)
+{
+//struct node* p=head;
+int i;
+struct node* new=(struct node*)malloc(sizeof(struct node));
+
+if(p==NULL)
+{
+p=new;
+new->data=data;
+new->next=NULL;
+return;
+}
+
+for(i=1;i<pos;i++)
+p=p->next;
+
+
+new->data=data;
+new->next=p->next;
+p->next=new;
+}
+
+
+
+
+void print(struct node* p)
+{
+//struct node* p=p;
+printf("the generated linked list is:");
+while(p!=NULL)
+{
+printf("%d ",p->data);
+p=p->next;
+}
+}
+
+
+int main()
+{
+struct node* head=(struct node*)malloc(sizeof(struct node));
+head->next=NULL;
+
+add(head,1,1);
+add(head,2,2);
+add(head,3,3);
+add(head,4,4);
+add(head,5,5);
+add(head,3,184);
+add(head,6,735);
+add(head,8,8);
+//(head,14,9);
+
+print(head);
+return 0;
+}
