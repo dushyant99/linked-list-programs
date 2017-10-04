@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int main(void) {
+	// your code goes here
+	
+	struct node
+	{
+		int data;
+		struct node* p;
+	};
+	
+	struct node* head=(struct node*)malloc(sizeof(struct node));
+	struct node* second=(struct node*)malloc(sizeof(struct node));
+	struct node* third =(struct node*)malloc(sizeof(struct node));
+	
+	head->data=1;    //initiliazing the nodes
+	head->p=second;
+	
+	second->data=2;
+	second->p=third;
+	
+	third->data=3;
+	third->p=NULL;
+	
+	struct node* temp=head;
+	
+	while(temp!=NULL)   //traversing the list
+	{
+		printf("%d ",temp->data);
+		temp=temp->p;
+		
+	}
+	
+	
+	return 0;
+}
