@@ -58,6 +58,17 @@ void reversePrint(struct node* p)
     
 }
 
+
+void Rprint(struct node* p)
+{
+    if (p == NULL)
+        return;
+    printf(" %d ",p->data);
+    Rprint(p->next);
+        
+}
+
+
 void print(struct node* p)
 {
     struct node* temp = p;
@@ -93,6 +104,9 @@ int main(int argc, char** argv) {
 
     printf("\n");
     reversePrint(head);
+
+    printf("\n using Rprint now \n");
+    Rprint(head);
 
     return (EXIT_SUCCESS);
 }
