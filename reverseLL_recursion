@@ -49,6 +49,14 @@ void reverse2(struct node* p)
 }
 
 
+void reversePrint(struct node* p)
+{
+    if (p == NULL)
+        return;
+    reversePrint(p->next);
+    printf(" %d ",p->data);
+    
+}
 
 void print(struct node* p)
 {
