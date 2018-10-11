@@ -1,0 +1,89 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node
+{
+    int data;
+    struct node* next;
+};
+
+
+
+struct node* head;
+
+void add(struct node* p, int pos, int data)
+{
+    int i;
+    struct node* new = (struct node*)malloc(sizeof(struct node));
+    
+    new->data = data;
+    
+    for(i =1;i<pos;i++)
+        p = p->next;
+    
+  
+    new->next = p->next;
+    p->next = new; 
+}
+
+
+
+void reverse2(struct node* p)
+{
+    
+    if (p->next == NULL)
+    {
+        head = p;
+        return;
+    }
+    
+    reverse2(p->next);
+    struct node* q = p->next;
+
+    q->next = p;
+    p->next = NULL;
+    
+    return head;
+}
+
+
+
+void print(struct node* p)
+{
+    struct node* temp = p;
+    printf(" \nThe linked list is as follows: \n ");
+   // p = p->next;
+    while(temp!=NULL)
+    {
+        printf("%d ",temp->data);
+        temp = temp->next;
+        
+        
+    } 
+    
+}
+
+int main(int argc, char** argv) {
+
+    head = (struct node*)malloc(sizeof(struct node));
+    
+    head->next = NULL;
+    
+    
+    add(head,1,10);
+    add(head,2,20);
+    add(head,3,30);
+    add(head,4,40);
+    add(head,5,50);
+    add(head,6,60);
+    print(head);
+    
+    reverse2(head);
+    print(head);
+    
+    return (EXIT_SUCCESS);
+}
+
+
